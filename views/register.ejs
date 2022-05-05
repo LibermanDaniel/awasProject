@@ -15,12 +15,26 @@
             <input type="text" placeholder="Enter username" name="username" id="username" required>
             <label for="password">Password:</label>
             <input type="password" placeholder="Enter password" name="password" id="password" required>
-            <button type="submit">Register</button>
+            <button type="submit" id="registerBtn">Register</button>
         </div>
-        <div style="display: none;">
+        <div style="display: block;">
             <input type="checkbox" id="adminRights" name="admin">
             <label for="admin">Admin rights</label>
         </div>
     </main>
 </body>
+<script>
+    const getUsername = document.getElementById("username")
+    const getPassword = document.getElementById("password")
+    const getAdminRights = document.getElementById("adminRights")
+    const submitBtn = document.getElementById("registerBtn")
+    
+    const func = (event) => {
+        console.log(getUsername.value)
+        console.log(getPassword.value)
+        console.log(getAdminRights.checked)
+    }
+
+    submitBtn.addEventListener("click", func)
+</script>
 </html>

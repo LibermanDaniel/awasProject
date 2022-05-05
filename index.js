@@ -1,6 +1,7 @@
 const express = require("express")
 const passport = require("passport")
 const mongoose = require("mongoose")
+const session = require("express-session")
 
 // Express
 const app = express()
@@ -11,6 +12,13 @@ const db = require("./config/keys").MongoURI;
 mongoose.connect(db, {useNewUrlParser: true})
         .then(() => console.log("MongoDB connected"))
         .catch(err => console.log(err))
+
+// Session
+app.use(session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+}))
 
 // EJS
 app.use(express.static("./public"))
