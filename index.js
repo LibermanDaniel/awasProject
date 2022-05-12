@@ -30,6 +30,7 @@ app.use(express.urlencoded({extended: false}))
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(passport.authenticate('session'))
 
 // Passport config
 require("./config/passport")(passport)

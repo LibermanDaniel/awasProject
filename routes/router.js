@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require("mongoose")
+const dbs = require("../config/sqlite")
 const passport = require('passport');
 const LocalStrategy = require("passport-local").Strategy
 const User = require("../models/User")
@@ -8,6 +9,22 @@ const router = express.Router();
 
 router.get("/", (req,res) => {
     res.render("homepage")
+})
+
+router.get("/dashboard", (req,res) => {
+    let name = req.query.filename
+    let query = 'select * from employees where Firstname=\"' + name + '\";'
+    // let query = 'SELECT table_name FROM dba_tables;'
+    let params = []
+    console.log(query)
+    dbs.all(query, params, (err, rows) => {
+        if (err) {
+            res.render("dashboard", {tester: err})
+            return;
+        }
+        console.log(rows)
+        res.render("dashboard", {tester: rows[0].Title})
+    });
 })
 
 router.get("/register", (req,res) => {
@@ -44,10 +61,15 @@ router.get("/login", (req,res) => {
 
 router.post("/login", async (req,res,next) => {
     passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/dashboard',
         failureRedirect: '/register',
     })(req, res, next)
 })
+
+router.post('/logout', (req, res, next) => {
+    req.logout();
+    res.redirect('/');
+  });
 
 router.get(("*"), (req,res) => {
     res.redirect('/')
