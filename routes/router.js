@@ -4,6 +4,7 @@ const dbs = require("../config/sqlite")
 const passport = require('passport');
 const LocalStrategy = require("passport-local").Strategy
 const User = require("../models/User")
+const {ensureAuthenticated} = require('../config/auth');
 
 const router = express.Router();
 
@@ -11,19 +12,21 @@ router.get("/", (req,res) => {
     res.render("homepage")
 })
 
-router.get("/dashboard", (req,res) => {
+router.get("/dashboard",ensureAuthenticated, (req,res) => {
     let name = req.query.filename
-    let query = 'select * from employees where Firstname=\"' + name + '\";'
+    let query = 'select * from employees where Firstname=\"' + name + ';'
     // let query = 'SELECT table_name FROM dba_tables;'
     let params = []
     console.log(query)
     dbs.all(query, params, (err, rows) => {
         if (err) {
-            res.render("dashboard", {tester: err})
+            res.render("dashboard")
             return;
         }
-        console.log(rows)
-        res.render("dashboard", {tester: rows[0].Title})
+        if(rows) {
+            console.log(rows)
+            res.render("dashboard", {"params":rows})
+        }
     });
 })
 
@@ -66,8 +69,8 @@ router.post("/login", async (req,res,next) => {
     })(req, res, next)
 })
 
-router.post('/logout', (req, res, next) => {
-    req.logout();
+router.post('/logout', async (req, res) => {
+    await res.logout();
     res.redirect('/');
   });
 
