@@ -20,9 +20,7 @@
         <hr>
 
         <div>
-            <h3>Unfortunately, this section is only available for admin users.</h3>
-
-            <p>ADMIN PANEL</p>
+            <h3><%= message %></h3>
         </div>
 
         <hr>
@@ -36,18 +34,16 @@
                 <button type="submit">Search</button> <br>
             </form>
             <div>
-                <p>Param:</p>
+                <p>Query result:</p>
                 <% if (typeof params !== 'undefined') { %>
                     <ul>
                         <% for (const [key, param] of Object.entries(params)) { %>
                             <li>
-                                <%= JSON.stringify(param, null, 4) %>
+                                <%- JSON.stringify(param, null, 4) %>
                             </li>
                             <% } %>
                     </ul>
-                    <% } else { %>
-                        <p>hello1</p>
-                        <% } %>
+                    <% } %>
             </div>
         </div>
 
