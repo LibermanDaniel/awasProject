@@ -12,20 +12,30 @@ router.get("/", (req,res) => {
     res.render("homepage")
 })
 
-router.get("/dashboard",ensureAuthenticated, (req,res) => {
+router.get("/dashboard",ensureAuthenticated, async (req,res) => {
     let name = req.query.filename
     let query = 'select * from employees where Firstname=\"' + name + ';'
-    // let query = 'SELECT table_name FROM dba_tables;'
     let params = []
-    console.log(query)
+    let msg
+
+    const username = req.user.username
+    const usernameDB = await User.find({username: username}).exec()
+    
+    if (usernameDB[0].rights) {
+        console.log("admin")
+        msg = "Congratulations you've gained admin access!"
+    }
+    else {
+        msg = "Unfortunately, this section is only available for admin users."
+    }
+
     dbs.all(query, params, (err, rows) => {
         if (err) {
-            res.render("dashboard")
+            res.render("dashboard", {"message":msg})
             return;
         }
         if(rows) {
-            console.log(rows)
-            res.render("dashboard", {"params":rows})
+            res.render("dashboard", {"params":rows, "message":msg})
         }
     });
 })
@@ -69,8 +79,8 @@ router.post("/login", async (req,res,next) => {
     })(req, res, next)
 })
 
-router.post('/logout', async (req, res) => {
-    await res.logout();
+router.get('/logout', async (req, res) => {
+    req.logout();
     res.redirect('/');
   });
 
