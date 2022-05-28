@@ -13,8 +13,8 @@ router.get("/", (req,res) => {
 })
 
 router.get("/dashboard",ensureAuthenticated, async (req,res) => {
-    let name = req.query.filename
-    let query = 'select * from employees where Firstname=\"' + name + ';'
+    let name = req.query.name
+    let query = 'select title from employees where lastname=\"' + name + '\";'
     let params = []
     let msg
 
@@ -31,10 +31,12 @@ router.get("/dashboard",ensureAuthenticated, async (req,res) => {
 
     dbs.all(query, params, (err, rows) => {
         if (err) {
+            console.log("pong")
             res.render("dashboard", {"message":msg})
             return;
         }
         if(rows) {
+            console.log(rows)
             res.render("dashboard", {"params":rows, "message":msg})
         }
     });
@@ -43,7 +45,6 @@ router.get("/dashboard",ensureAuthenticated, async (req,res) => {
 router.get("/register", (req,res) => {
     res.render("register", {"error": ""})
 })
-
 
 router.post("/register", async (req,res) => {
     // toggle check box - true/false 
