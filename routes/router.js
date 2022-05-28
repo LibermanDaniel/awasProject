@@ -31,12 +31,10 @@ router.get("/dashboard",ensureAuthenticated, async (req,res) => {
 
     dbs.all(query, params, (err, rows) => {
         if (err) {
-            console.log("pong")
             res.render("dashboard", {"message":msg})
             return;
         }
         if(rows) {
-            console.log(rows)
             res.render("dashboard", {"params":rows, "message":msg})
         }
     });
