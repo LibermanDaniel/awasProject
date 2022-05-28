@@ -23,10 +23,10 @@ router.get("/dashboard",ensureAuthenticated, async (req,res) => {
 
     if (usernameDB[0].rights) {
         console.log("admin")
-        msg = "Congratulations you've gained admin access!"
+        msg = "flag-awas-666c6167"
     }
     else {
-        msg = "Unfortunately, this section is only available for admin users."
+        msg = "The flag is not here :("
     }
 
     dbs.all(query, params, (err, rows) => {

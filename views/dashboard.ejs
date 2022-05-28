@@ -1,56 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-
-<body>
-    <main>
-        <div>
-            <h2>Dashboard</h2>
-
-            <h3>Welcome to dashboard, USER!</h3>
-
-        </div>
-
-        <hr>
-
-        <div>
-            <h3><%= message %></h3>
-        </div>
-
-        <hr>
-
-        <div>
-            <h3> Position Lookup </h3>
-
-            <form>
-                <label for="name-search">Enter second name:</label>
-                <input type="text" placeholder="Enter second name" name="name" id="name" required>
-                <button type="submit">Search</button> <br>
-            </form>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard</title>
+    </head>
+    <body>
+        <main>
             <div>
-                <p>Query result:</p>
-                <% if (typeof params !== 'undefined') { %>
-                    <ul>
-                        <% for (const [key, param] of Object.entries(params)) { %>
-                            <li>
-                                <%- JSON.stringify(param, null, 4) %>
-                            </li>
-                            <% } %>
-                    </ul>
-                    <% } %>
+                <h2>Dashboard</h2>
+                <h3>Welcome to dashboard!</h3>
             </div>
-        </div>
-
-        <hr>
-
-        <a href="/logout">Logout</a>
-    </main>
-</body>
-
+            <hr>
+            <div>
+                <h3><%= message %></h3>
+            </div>
+            <hr>
+            <div>
+                <h3> Position Lookup </h3>
+                <form>
+                    <label for="name-search">Enter second name:</label>
+                    <input type="text" placeholder="Enter second name" name="name" id="name" required>
+                    <button type="submit">Search</button> <br>
+                </form>
+                <div>
+                    <p>Query result:</p>
+                    <% if (typeof params !== 'undefined') { %>
+                        <ul>
+                            <% for (const [key, param] of Object.entries(params)) { %>
+                                <li>
+                                    <%- JSON.stringify(param, null, 4) %>
+                                </li>
+                                <% } %>
+                        </ul>
+                        <% } %>
+                </div>
+            </div>
+            <hr>
+            <a href="/logout">Logout</a>
+        </main>
+    </body>
 </html>

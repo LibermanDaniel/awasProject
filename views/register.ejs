@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-
-<body>
-    <main>
-        <div>
-            <h2>Registration Form</h2>
-            <p>Please fill in your details to create an account</p>
-            <form action="/register" method="POST">
-                <label for="username">Username:</label>
-                <input type="text" placeholder="Enter username" name="username" id="username" required>
-                <label for="password">Password:</label>
-                <input type="password" placeholder="Enter password" name="password" id="password" required>
-                <input type="checkbox" id="adminRights" name="admin" style="display: none">
-                <label for="admin" style="display: none">Admin rights</label>
-                <button type="submit" id="registerBtn">Submit</button>
-            </form>
-        </div>
-        <a href="/login">Login</a>
-        <a href="/">Homepage</a>
-        <div id="error">
-            <p><%=error%></p>
-        </div>
-    </main>
-    <script>
-        const errorMsg = document.getElementById("error")
-
-        const t = setTimeout(() => { errorMsg.innerHTML = '' }, 2000)
-    </script>
-</body>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register</title>
+    </head>
+    <body>
+        <main>
+            <div style="margin-bottom: 16px">
+                <h2>Registration Form</h2>
+                <p>Please fill in your details to create an account</p>
+                <form action="/register" method="POST">
+                    <label for="username">Username:</label>
+                    <input type="text" placeholder="Enter username" name="username" id="username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" placeholder="Enter password" name="password" id="password" required>
+                    <input type="checkbox" id="adminRights" name="admin" style="display: none">
+                    <label for="admin" style="display: none">Admin rights</label>
+                    <button type="submit" id="registerBtn">Submit</button>
+                </form>
+            </div>
+            <a href="/login">Login</a>
+            <a href="/">Homepage</a>
+            <div id="error">
+                <p><%=error%></p>
+            </div>
+        </main>
+        <script>
+            const errorMsg = document.getElementById("error")
+            const t = setTimeout(() => { errorMsg.innerHTML = '' }, 2000)
+        </script>
+    </body>
 </html>
