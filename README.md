@@ -48,5 +48,5 @@ There are three vulnerabilities that the application allows to exploit:
 * Client-side input restrictions
 * Username/password enumeration
 
-To find more information about application functionality, refer to the user manual.
+To find more information about application functionality, refer to the [User Manual](./User%20Manual.pdf).
 
