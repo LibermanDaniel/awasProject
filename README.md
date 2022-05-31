@@ -14,12 +14,12 @@ Web application is running on local [NodeJS server](https://nodejs.org/en/).<br>
 In order to use the application for training, NodeJS as well as dependencies must be installed.<br>
 Navigate to the root folder of application (repository) and run the following:
 ```
-npm install bcrypt ejs express express-session md5 mongoose passport passport-local sqlite3
+npm install 
 ```
 After the required modules are install, the server can be started either by running index file
 or executing the npm command:
 ```
-node index.js
+npm start
   or
 npm run dev
 ```
