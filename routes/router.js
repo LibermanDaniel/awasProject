@@ -8,7 +8,21 @@ const { ensureAuthenticated } = require('../config/auth');
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", async(req,res) => {
+    mongoose.connection.db.dropCollection("users", (err,result) => {
+        console.log("Collection droped");
+    })
+    const doc = new User({
+        username: 'admin',
+        password: 'spongebob',
+        rights: true
+    })
+    doc.save()
+        .then((response) => console.log(response))
+    res.status(200).redirect('/homepage')
+})
+
+router.get("/homepage", (req, res) => {
     res.render("homepage")
 })
 
@@ -81,7 +95,7 @@ router.post("/login", async (req, res, next) => {
 
 router.get('/logout', async (req, res) => {
     req.logout();
-    res.redirect('/');
+    res.redirect('/homepage');
 });
 
 router.post('/delete', async (req, res) => {
@@ -95,12 +109,12 @@ router.post('/delete', async (req, res) => {
     })
     doc.save()
         .then((response) => console.log(response))
-    res.status(200).redirect('/')
+    res.status(200).redirect('/homepage')
 
 })
 
 router.get(("*"), (req, res) => {
-    res.redirect('/')
+    res.redirect('/homepage')
 })
 
 module.exports = router
